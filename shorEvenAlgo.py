@@ -24,9 +24,30 @@ def transform(arr):
             rv.append(arr[i]+arr[i+1][0])
             arr[i+1] = arr[i+1][1:]
     rv.append(arr[-1])
-    return rv
+    rv = [r for r in rv if r!='']
+    n = len(rv)
+    if n==1:
+        x = rv[n-1]
+        rv = split_chunks_again(x)
+    rv = [r for r in rv if r!='']
     
-# Example
+    return rv
+
+def split_chunks_again(string):
+    
+    chunks = []
+    rv_str = ""
+    for i in range(len(string)):
+        if int(i)%2 == 0 and int(string[i]) != 0:
+            chunks.append(rv_str)
+            rv_str = string[i] 
+            
+        else:
+            rv_str += string[i]
+    chunks.append(rv_str)
+    chunks = [int(c) for c in chunks if c != ""]
+    return chunks
+
 def split_chunks(string):
     chunks = []
     rv_str = ""
@@ -92,10 +113,10 @@ def parallel_temp_dict_factor(item, shared_dict):
     
 def parallel_for_loop_factor(n):
     results = parallel_factor(n)
-    
     chunks = []
     for my_dict in results:
         chunks.extend(my_dict.keys())
+
     temp_dict = smart_factor_for_parallel_chunks(n,chunks)
     items = [{"item": k} for k in list(temp_dict.keys())]
     with Manager() as manager:
@@ -127,24 +148,38 @@ def for_loop_factor(n):
     
 
 # if __name__ == "__main__":
-#     string = "2"*10
-#     print(string)
-#     out = parallel_for_loop_factor(int(string))
-#     print(f"Factors of {string} using for loop: {out}")
+    # string = "4"
+    # print(string)
+    # out = parallel_for_loop_factor(int(string))
+    # print(f"Factors of {string} using for loop: {out}")
 
-#     string = "2"*200
-#     print(len(string))
-#     fast_out = parallel_for_loop_factor(int(string))
-#     print(f"Factors of {string} using parallel for loop: {fast_out}")
+    # string = "2"*200
+    # print(len(string))
+    # fast_out = parallel_for_loop_factor(int(string))
+    # print(f"Factors of {string} using parallel for loop: {fast_out}")
 
-#     length = 100
-#     string = ""
-#     for i in range(1, length+1):
-#         string += str(random.randint(1,9))
-#     n=len(string)
-#     if int(string[n-1])%2==1:
-#         string = string[:-1] + "2"
-#     print(string)
-#     print(len(string))
-#     fast_out = parallel_for_loop_factor(int(string))
-#     print(f"Factors of {string} using parallel for loop: {fast_out}")
+    # length = 100
+    # string = ""
+    # for i in range(1, length+1):
+    #     string += str(random.randint(1,9))
+    # n=len(string)
+    # if int(string[n-1])%2==1:
+    #     string = string[:-1] + "2"
+    # print(string)
+    # print(len(string))
+    # fast_out = parallel_for_loop_factor(int(string))
+    # print(f"Factors of {string} using parallel for loop: {fast_out}")
+
+    '''
+    length = 100
+    string = ""
+    for i in range(1, length+1):
+        string += str(9)
+    n=len(string)
+    if int(string[n-1])%2==1:
+        string = string[:-1] + "2"
+    print(string)
+    print(len(string))
+    fast_out = parallel_for_loop_factor(int(string))
+    print(f"Factors of {string} using parallel for loop: {fast_out}")
+    '''
