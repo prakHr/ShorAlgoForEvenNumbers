@@ -254,19 +254,19 @@ def for_loop_factor(n):
     return rv
     
 
-# if __name__ == "__main__":
-    # NEWLINE_CHAR = "\n"
+if __name__ == "__main__":
+    NEWLINE_CHAR = "\n"
     # for string in ["4","6","10","19","9992","999999992","1234","1234567898"]:
     #     # print(string)
     #     out = parallel_for_loop_factor(int(string))
     #     print(f"Factors of {string} using for loop: {out}")
     #     print(NEWLINE_CHAR)
 
-    # for string in ["2"*10,"2"*20,"2"*50,"2"*100,"2"*200]:
-    #     print(len(string))
-    #     fast_out = parallel_for_loop_factor(int(string))
-    #     print(f"Factors of {string} using parallel for loop: {fast_out}")
-    #     print(NEWLINE_CHAR)
+    for string in ["2"*10,"2"*20,"2"*50,"2"*100,"2"*200]:
+        # print(len(string))
+        fast_out = parallel_for_loop_factor(int(string))
+        print(f"Factors of {string} using parallel for loop: {fast_out}")
+        print(NEWLINE_CHAR)
     # length = 100
     # string = ""
     # for i in range(1, length+1):

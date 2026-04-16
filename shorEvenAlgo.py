@@ -97,7 +97,7 @@ def parallel_factor(n):
     c = split_chunks(str(n))
     results = [{"n" : int(x), "c" : c} for x in split_chunks(str(n))]
     with WorkerPool(n_jobs=num_cores,daemon=False) as pool:
-        results = pool.map(smart_parallel_factor, results, progress_bar=True)
+        results = pool.map(smart_parallel_factor, results, progress_bar=False)
     return results
 
 
@@ -126,7 +126,7 @@ def parallel_for_loop_factor(n):
             pool.map(
                 parallel_temp_dict_factor,
                 [(item, shared_dict) for item in items],
-                progress_bar=True
+                progress_bar=False
             )
 
         # Convert back to normal dict
